@@ -7,7 +7,7 @@
 
     <h1>Register</h1>
 
-    <form action="/register" method="POST">
+    <form action="/registeration" method="POST">
         @csrf
 
         <div>
