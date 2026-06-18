@@ -8,7 +8,7 @@ Route::get('/', function () {
 });
 
 
-Route::post('/register',[AuthController::class,'showRegister']);
+Route::get('/register',[AuthController::class,'showRegister']);
 Route::post('/registration',[AuthController::class,'saveRegister']);
 
 
