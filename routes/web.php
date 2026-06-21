@@ -10,6 +10,5 @@ Route::get('/', function () {
 
 Route::get('/register',[AuthController::class,'showRegister']);
 Route::post('/registeration',[AuthController::class,'saveRegister']);
-Route::get('/login',function(){
-    return view('auth.login');
-});
+Route::get('/login',[AuthController::class,'showLogin']);
+Route::post('/logincheck',[AuthController::class,'checkLogin']);

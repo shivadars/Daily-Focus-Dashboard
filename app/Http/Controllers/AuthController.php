@@ -25,5 +25,20 @@ class AuthController extends Controller
         ]);
         return redirect('/register');
     }
-
+    public function showLogin(){
+        return view('auth.login');
+    }
+    public function checkLogin(Request $request){
+        $credentials=$request->validate([
+            'email'=>'required|email',
+            'password'=>'required'
+        ]);
+        if(Auth::attempt($credentials)){
+            $request->session()->regenerate();
+            return redirect('/login');
+        }
+        return back()->withErrors([
+            'email'=>'invalid credentials'
+        ]);
+    }
 }

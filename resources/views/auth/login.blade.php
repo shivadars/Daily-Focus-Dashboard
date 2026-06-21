@@ -11,7 +11,7 @@
         <p>{{ session('success') }}</p>
     @endif
 
-    <form action="/login" method="POST">
+    <form action="/logincheck" method="POST">
         @csrf
 
         <div>
