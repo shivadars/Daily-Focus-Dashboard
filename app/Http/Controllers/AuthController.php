@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -23,7 +24,7 @@ class AuthController extends Controller
         'email'=>$request->email,
         'password'=>Hash::make($request->password)
         ]);
-        return redirect('/register');
+        return redirect('/login');
     }
     public function showLogin(){
         return view('auth.login');
@@ -35,7 +36,7 @@ class AuthController extends Controller
         ]);
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
-            return redirect('/login');
+            return redirect('/dashboard');
         }
         return back()->withErrors([
             'email'=>'invalid credentials'
