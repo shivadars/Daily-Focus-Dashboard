@@ -7,8 +7,16 @@
 
     <h1>Login</h1>
 
-    @if(session('success'))
-        <p>{{ session('success') }}</p>
+    @if(session('error'))
+    <p>{{ session('error') }}</p>
+    @endif
+
+    @if ($errors->any())
+        <div>
+            @foreach ($errors->all() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
+        </div>
     @endif
 
     <form action="/logincheck" method="POST">
