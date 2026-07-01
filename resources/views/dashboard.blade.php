@@ -77,9 +77,74 @@
             box-shadow:0 2px 8px rgba(0,0,0,.1);
         }
 
+        /* Modal */
+
+        .modal{
+            display:none;
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,.5);
+        }
+
+        .modal-content{
+            background:white;
+            width:500px;
+            margin:100px auto;
+            padding:25px;
+            border-radius:8px;
+        }
+
+        .modal-content h2{
+            margin-bottom:20px;
+        }
+
+        .modal-content label{
+            display:block;
+            margin-top:15px;
+            margin-bottom:5px;
+        }
+
+        .modal-content input,
+        .modal-content textarea,
+        .modal-content select{
+
+            width:100%;
+            padding:10px;
+            border:1px solid #ccc;
+            border-radius:5px;
+
+        }
+
+        .modal-content textarea{
+            resize:none;
+            height:100px;
+        }
+
+        .modal-buttons{
+            margin-top:20px;
+            display:flex;
+            justify-content:flex-end;
+            gap:10px;
+        }
+
+        #closeModal{
+
+            padding:10px 20px;
+            border:none;
+            background:#888;
+            color:white;
+            cursor:pointer;
+            border-radius:5px;
+
+        }
+
     </style>
 
 </head>
+
 <body>
 
 <div class="container">
@@ -91,7 +156,7 @@
             <p>Today's Tasks</p>
         </div>
 
-        <button class="btn">
+        <button class="btn" id="addTaskBtn">
             + Add Task
         </button>
 
@@ -113,7 +178,6 @@
 
     <div class="task-list">
 
-
         <div class="empty">
 
             <h3>No Tasks Yet</h3>
@@ -127,6 +191,82 @@
     </div>
 
 </div>
+
+<!-- Modal -->
+
+<div id="taskModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>Add New Task</h2>
+
+        <form>
+
+            <label>Task Title</label>
+            <input type="text" placeholder="Enter task title">
+
+            <label>Description</label>
+            <textarea placeholder="Enter description"></textarea>
+
+            <label>Priority</label>
+
+            <select>
+                <option>High</option>
+                <option>Medium</option>
+                <option>Low</option>
+            </select>
+
+            <div class="modal-buttons">
+
+                <button type="button" id="closeModal">
+                    Cancel
+                </button>
+
+                <button type="submit" class="btn">
+                    Save Task
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- JavaScript -->
+
+<script>
+
+const addTaskBtn = document.getElementById("addTaskBtn");
+
+const taskModal = document.getElementById("taskModal");
+
+const closeModal = document.getElementById("closeModal");
+
+addTaskBtn.onclick = function(){
+
+    taskModal.style.display = "block";
+
+}
+
+closeModal.onclick = function(){
+
+    taskModal.style.display = "none";
+
+}
+
+window.onclick = function(event){
+
+    if(event.target == taskModal){
+
+        taskModal.style.display = "none";
+
+    }
+
+}
+
+</script>
 
 </body>
 </html>
