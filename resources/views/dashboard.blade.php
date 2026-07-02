@@ -178,17 +178,38 @@
 
     <div class="task-list">
 
-        <div class="empty">
+@if($tasks->count() > 0)
 
-            <h3>No Tasks Yet</h3>
+    @foreach($tasks as $task)
+
+        <div style="background:white;padding:20px;border-radius:8px;margin-bottom:15px;">
+
+            <h3>{{ $task->title }}</h3>
+
+            <p>{{ $task->description }}</p>
 
             <p>
-                Click <b>Add Task</b> to create your first task.
+                Priority:
+                <b>{{ $task->priority }}</b>
             </p>
 
         </div>
 
+    @endforeach
+
+@else
+
+    <div class="empty">
+
+        <h3>No Tasks Yet</h3>
+
+        <p>Click <b>Add Task</b> to create your first task.</p>
+
     </div>
+
+@endif
+
+</div>
 
 </div>
 

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Task;
 
 class DashboardController extends Controller
 {
     public function showdashBoard(){
-        return view('dashboard');
+        $tasks=Task::all();
+        return view('dashboard',compact('tasks'));
     }
 }
