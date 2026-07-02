@@ -152,7 +152,7 @@
     <div class="header">
 
         <div>
-            <h1>🎯 Daily Focus Dashboard</h1>
+            <h1>Daily Focus Dashboard</h1>
             <p>Today's Tasks</p>
         </div>
 
@@ -200,17 +200,18 @@
 
         <h2>Add New Task</h2>
 
-        <form>
+        <form method='post' action="savetask">
+            @csrf
 
             <label>Task Title</label>
-            <input type="text" placeholder="Enter task title">
+            <input type="text" name= "title" placeholder="Enter task title">
 
             <label>Description</label>
-            <textarea placeholder="Enter description"></textarea>
+            <textarea placeholder="Enter description" name="description"></textarea>
 
             <label>Priority</label>
 
-            <select>
+            <select name="priority">
                 <option>High</option>
                 <option>Medium</option>
                 <option>Low</option>
