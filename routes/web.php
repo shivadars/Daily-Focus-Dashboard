@@ -16,3 +16,4 @@ Route::get('/login',[AuthController::class,'showLogin']);
 Route::post('/logincheck',[AuthController::class,'checkLogin']);
 Route::get('/dashboard',[DashboardController::class,'showdashBoard']);
 Route::post('/savetask',[TaskController::class,'storetask']);
+Route::post('/tasks.edit',[TaskController::class,'editask']);

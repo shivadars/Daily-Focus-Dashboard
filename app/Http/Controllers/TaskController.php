@@ -15,4 +15,14 @@ class TaskController extends Controller
         ]);
         return redirect('/dashboard');
     }
+    public function editask(Request $request,Task $task){
+        $task->update($request->only(
+            [
+                'title',
+                'description'
+                'priority'
+            ]
+        ));
+        return redirect('/dashboard');
+    }
 }

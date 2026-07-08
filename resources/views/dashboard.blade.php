@@ -6,143 +6,155 @@
     <title>Daily Focus Dashboard</title>
 
     <style>
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial, Helvetica, sans-serif;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
-        body{
-            background:#f4f6f9;
+        body {
+            background: #f4f6f9;
         }
 
-        .container{
-            width:80%;
-            margin:40px auto;
+        .container {
+            width: 80%;
+            margin: 40px auto;
         }
 
-        .header{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            margin-bottom:30px;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
         }
 
-        .btn{
-            background:#0d6efd;
-            color:white;
-            border:none;
-            padding:10px 20px;
-            border-radius:5px;
-            cursor:pointer;
+        .btn {
+            background: #0d6efd;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        .progress-card{
-            background:white;
-            padding:20px;
-            border-radius:8px;
-            margin-bottom:30px;
-            box-shadow:0 2px 8px rgba(0,0,0,.1);
+        .btn-warning {
+            background: #ffc107;
+            color: #000;
         }
 
-        .progress{
-            width:100%;
-            height:20px;
-            background:#ddd;
-            border-radius:20px;
-            overflow:hidden;
-            margin-top:10px;
+        .btn-danger {
+            background: #dc3545;
+            color: white;
         }
 
-        .progress-bar{
-            width:0%;
-            height:100%;
-            background:green;
+        .progress-card, .task-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.1);
         }
 
-        .task-list{
-            display:flex;
-            flex-direction:column;
-            gap:20px;
+        .progress {
+            width: 100%;
+            height: 20px;
+            background: #ddd;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 10px;
         }
 
-        .empty{
-            background:white;
-            padding:40px;
-            border-radius:8px;
-            text-align:center;
-            color:#777;
-            box-shadow:0 2px 8px rgba(0,0,0,.1);
+        .progress-bar {
+            height: 100%;
+            background: green;
         }
 
-        /* Modal */
-
-        .modal{
-            display:none;
-            position:fixed;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            background:rgba(0,0,0,.5);
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        .modal-content{
-            background:white;
-            width:500px;
-            margin:100px auto;
-            padding:25px;
-            border-radius:8px;
+        .task-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .modal-content h2{
-            margin-bottom:20px;
+        .task-card-actions {
+            display: flex;
+            gap: 10px;
         }
 
-        .modal-content label{
-            display:block;
-            margin-top:15px;
-            margin-bottom:5px;
+        .empty {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            color: #777;
+            box-shadow: 0 2px 8px rgba(0,0,0,.1);
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,.5);
+        }
+
+        .modal-content {
+            background: white;
+            width: 500px;
+            margin: 100px auto;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 20px;
+        }
+
+        .modal-content label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
         }
 
         .modal-content input,
         .modal-content textarea,
-        .modal-content select{
-
-            width:100%;
-            padding:10px;
-            border:1px solid #ccc;
-            border-radius:5px;
-
+        .modal-content select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
 
-        .modal-content textarea{
-            resize:none;
-            height:100px;
+        .modal-content textarea {
+            resize: none;
+            height: 100px;
         }
 
-        .modal-buttons{
-            margin-top:20px;
-            display:flex;
-            justify-content:flex-end;
-            gap:10px;
+        .modal-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
         }
 
-        #closeModal{
-
-            padding:10px 20px;
-            border:none;
-            background:#888;
-            color:white;
-            cursor:pointer;
-            border-radius:5px;
-
+        .btn-cancel {
+            padding: 10px 20px;
+            border: none;
+            background: #888;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
         }
-
     </style>
-
 </head>
 
 <body>
@@ -150,144 +162,177 @@
 <div class="container">
 
     <div class="header">
-
         <div>
             <h1>Daily Focus Dashboard</h1>
             <p>Today's Tasks</p>
         </div>
 
-        <button class="btn" id="addTaskBtn">
-            + Add Task
-        </button>
-
+        <button class="btn" id="addTaskBtn">+ Add Task</button>
     </div>
 
+    @php
+        $totalTasks = $tasks->count();
+        $completedTasks = $tasks->where('status', 'completed')->count(); 
+        $percentage = $totalTasks > 0 ? round(($completedTasks / $totalTasks) * 100) : 0;
+    @endphp
+
     <div class="progress-card">
-
         <h2>Today's Progress</h2>
-
         <div class="progress">
-            <div class="progress-bar"></div>
+            <div class="progress-bar" style="width: {{ $percentage }}%;"></div>
         </div>
-
         <p style="margin-top:10px;">
-            0 / 0 Tasks Completed
+            {{ $completedTasks }} / {{ $totalTasks }} Tasks Completed ({{ $percentage }}%)
         </p>
-
     </div>
 
     <div class="task-list">
+    @if($tasks->count() > 0)
+        @foreach($tasks as $task)
+            <div class="task-card">
+                <div class="task-card-header">
+                    <div>
+                        <h3>{{ $task->title }}</h3>
+                        <p style="color: #666; margin-top: 5px;">{{ $task->description }}</p>
+                        <small style="display:inline-block; margin-top: 10px; padding: 2px 8px; background: #eee; border-radius: 3px;">
+                            Priority: {{ $task->priority }}
+                        </small>
+                    </div>
 
-@if($tasks->count() > 0)
+                    <div class="task-card-actions">
+                        <button 
+                            type="button" 
+                            class="btn btn-warning editTaskBtn"
+                            data-id="{{ $task->id }}"
+                            data-title="{{ $task->title }}"
+                            data-description="{{ $task->description }}"
+                            data-priority="{{ $task->priority }}"
+                        >
+                            Edit
+                        </button>
 
-    @foreach($tasks as $task)
-
-        <div style="background:white;padding:20px;border-radius:8px;margin-bottom:15px;">
-
-            <h3>{{ $task->title }}</h3>
-
-            <p>{{ $task->description }}</p>
-
-            <p>
-                Priority:
-                <b>{{ $task->priority }}</b>
-            </p>
-
+                        <form action="/tasks/{{ $task->id }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this task?')">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @else
+        <div class="empty">
+            <h3>No Tasks Yet</h3>
+            <p>Click <b>Add Task</b> to create your first task.</p>
         </div>
-
-    @endforeach
-
-@else
-
-    <div class="empty">
-
-        <h3>No Tasks Yet</h3>
-
-        <p>Click <b>Add Task</b> to create your first task.</p>
-
+    @endif
     </div>
 
-@endif
-
 </div>
 
-</div>
-
-<!-- Modal -->
-
-<div id="taskModal" class="modal">
-
+<div id="addTaskModal" class="modal">
     <div class="modal-content">
-
         <h2>Add New Task</h2>
-
-        <form method='post' action="savetask">
+        <form method="POST" action="/tasks">
             @csrf
 
             <label>Task Title</label>
-            <input type="text" name= "title" placeholder="Enter task title">
+            <input type="text" name="title" placeholder="Enter task title" required>
 
             <label>Description</label>
             <textarea placeholder="Enter description" name="description"></textarea>
 
             <label>Priority</label>
-
             <select name="priority">
-                <option>High</option>
-                <option>Medium</option>
-                <option>Low</option>
+                <option value="High">High</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Low">Low</option>
             </select>
 
             <div class="modal-buttons">
-
-                <button type="button" id="closeModal">
-                    Cancel
-                </button>
-
-                <button type="submit" class="btn">
-                    Save Task
-                </button>
-
+                <button type="button" class="btn-cancel closeModalBtn">Cancel</button>
+                <button type="submit" class="btn">Save Task</button>
             </div>
-
         </form>
-
     </div>
-
 </div>
 
-<!-- JavaScript -->
+<div id="editTaskModal" class="modal">
+    <div class="modal-content">
+        <h2>Edit Task</h2>
+        <form id="editTaskForm" method="POST" action="">
+            @csrf
+            @method('PUT')
+
+            <label>Task Title</label>
+            <input type="text" id="edit_title" name="title" required>
+
+            <label>Description</label>
+            <textarea id="edit_description" name="description"></textarea>
+
+            <label>Priority</label>
+            <select id="edit_priority" name="priority">
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+
+            <div class="modal-buttons">
+                <button type="button" class="btn-cancel closeModalBtn">Cancel</button>
+                <button type="submit" class="btn">Update Task</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <script>
+    // Modal Elements
+    const addTaskBtn = document.getElementById("addTaskBtn");
+    const addTaskModal = document.getElementById("addTaskModal");
+    const editTaskModal = document.getElementById("editTaskModal");
+    const closeBtns = document.querySelectorAll(".closeModalBtn");
 
-const addTaskBtn = document.getElementById("addTaskBtn");
-
-const taskModal = document.getElementById("taskModal");
-
-const closeModal = document.getElementById("closeModal");
-
-addTaskBtn.onclick = function(){
-
-    taskModal.style.display = "block";
-
-}
-
-closeModal.onclick = function(){
-
-    taskModal.style.display = "none";
-
-}
-
-window.onclick = function(event){
-
-    if(event.target == taskModal){
-
-        taskModal.style.display = "none";
-
+    // Open Add Modal
+    addTaskBtn.onclick = function() {
+        addTaskModal.style.display = "block";
     }
 
-}
+    // Open Edit Modal with Dynamic Data
+    document.querySelectorAll(".editTaskBtn").forEach(button => {
+        button.onclick = function() {
+            const taskId = this.getAttribute("data-id");
+            const taskTitle = this.getAttribute("data-title");
+            const taskDesc = this.getAttribute("data-description");
+            const taskPriority = this.getAttribute("data-priority");
 
+            // Update form action route dynamically
+            document.getElementById("editTaskForm").action = "/tasks/" + taskId;
+
+            // Fill form inputs
+            document.getElementById("edit_title").value = taskTitle;
+            document.getElementById("edit_description").value = taskDesc;
+            document.getElementById("edit_priority").value = taskPriority;
+
+            // Show Edit Modal
+            editTaskModal.style.display = "block";
+        }
+    });
+
+    // Close Modals on Cancel
+    closeBtns.forEach(btn => {
+        btn.onclick = function() {
+            addTaskModal.style.display = "none";
+            editTaskModal.style.display = "none";
+        }
+    });
+
+    // Close Modal when clicking outside content area
+    window.onclick = function(event) {
+        if (event.target == addTaskModal) addTaskModal.style.display = "none";
+        if (event.target == editTaskModal) editTaskModal.style.display = "none";
+    }
 </script>
 
 </body>
