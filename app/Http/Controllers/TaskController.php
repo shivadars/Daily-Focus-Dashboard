@@ -27,4 +27,9 @@ class TaskController extends Controller
         ));
         return redirect('/dashboard');
     }
+    public function destroytask(Task $task)
+    {
+        $task->delete();
+        return redirect('/dashboard');
+    }
 }

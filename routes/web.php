@@ -17,3 +17,4 @@ Route::post('/logincheck', [AuthController::class, 'checkLogin']);
 Route::get('/dashboard', [DashboardController::class, 'showdashBoard']);
 Route::post('/savetask', [TaskController::class, 'storetask']);
 Route::put('/tasks/{task}', [TaskController::class, 'editask']);
+Route::delete('/tasks/{task}', [TaskController::class, 'destroytask']);
