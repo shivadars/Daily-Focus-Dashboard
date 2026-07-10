@@ -235,7 +235,7 @@
 <div id="addTaskModal" class="modal">
     <div class="modal-content">
         <h2>Add New Task</h2>
-        <form method="POST" action="/tasks">
+        <form method="POST" action="/savetask">
             @csrf
 
             <label>Task Title</label>
