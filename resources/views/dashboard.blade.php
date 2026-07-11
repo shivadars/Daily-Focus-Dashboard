@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Daily Focus Dashboard</title>
 
     <style>
@@ -191,12 +192,21 @@
         @foreach($tasks as $task)
             <div class="task-card">
                 <div class="task-card-header">
-                    <div>
-                        <h3>{{ $task->title }}</h3>
-                        <p style="color: #666; margin-top: 5px;">{{ $task->description }}</p>
-                        <small style="display:inline-block; margin-top: 10px; padding: 2px 8px; background: #eee; border-radius: 3px;">
-                            Priority: {{ $task->priority }}
-                        </small>
+                    <div style="display: flex; align-items: flex-start; gap: 15px;">
+                        <input 
+                            type="checkbox" 
+                            class="toggle-status-btn" 
+                            data-id="{{ $task->id }}" 
+                            {{ $task->status === 'completed' ? 'checked' : '' }}
+                            style="margin-top: 6px; transform: scale(1.3); cursor: pointer;"
+                        >
+                        <div>
+                            <h3 id="task-title-{{ $task->id }}" style="{{ $task->status === 'completed' ? 'text-decoration: line-through; color: #888;' : '' }}">{{ $task->title }}</h3>
+                            <p id="task-desc-{{ $task->id }}" style="color: {{ $task->status === 'completed' ? '#aaa' : '#666' }}; margin-top: 5px;">{{ $task->description }}</p>
+                            <small style="display:inline-block; margin-top: 10px; padding: 2px 8px; background: #eee; border-radius: 3px;">
+                                Priority: {{ $task->priority }}
+                            </small>
+                        </div>
                     </div>
 
                     <div class="task-card-actions">
@@ -333,6 +343,47 @@
         if (event.target == addTaskModal) addTaskModal.style.display = "none";
         if (event.target == editTaskModal) editTaskModal.style.display = "none";
     }
+
+    // Toggle Task Status (AJAX)
+    document.querySelectorAll(".toggle-status-btn").forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const taskId = this.getAttribute("data-id");
+            const isCompleted = this.checked;
+            const titleEl = document.getElementById("task-title-" + taskId);
+            const descEl = document.getElementById("task-desc-" + taskId);
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            // Optimistic UI update (instantly cross out text)
+            if (isCompleted) {
+                titleEl.style.textDecoration = "line-through";
+                titleEl.style.color = "#888";
+                descEl.style.color = "#aaa";
+            } else {
+                titleEl.style.textDecoration = "none";
+                titleEl.style.color = "#000";
+                descEl.style.color = "#666";
+            }
+
+            // Send request to backend
+            fetch(`/tasks/${taskId}/toggle`, {
+                method: 'PATCH', 
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: JSON.stringify({ status: isCompleted ? 'completed' : 'pending' })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    // Reload page to update the progress bar at the top
+                    // (We can do this without reloading later by updating the DOM directly)
+                    window.location.reload(); 
+                }
+            })
+            .catch(error => console.error('Error updating task:', error));
+        });
+    });
 </script>
 
 </body>
