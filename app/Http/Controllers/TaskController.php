@@ -32,4 +32,19 @@ class TaskController extends Controller
         $task->delete();
         return redirect('/dashboard');
     }
+    public function toggleStatus(Request $request, Task $task)
+    {
+        $request->validate([
+            'status' => 'required|in:completed,pending'
+        ]);
+        $task->update([
+            'status' => $request->status
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Task status updated successfully',
+            'new_status' => $task->status
+        ]);
+    }
 }

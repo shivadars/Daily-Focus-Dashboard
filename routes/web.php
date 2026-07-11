@@ -19,4 +19,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/savetask', [TaskController::class, 'storetask']);
     Route::put('/tasks/{task}', [TaskController::class, 'editask']);
     Route::delete('/tasks/{task}', [TaskController::class, 'destroytask']);
+    Route::patch('/tasks/{task}/toggle', [TaskController::class, 'toggleStatus']);
 });
