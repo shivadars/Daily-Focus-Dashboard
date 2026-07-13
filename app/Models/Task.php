@@ -13,6 +13,8 @@ class Task extends Model
 
         'priority',
 
-        'status'
+        'status',
+
+        'user_id'
     ];
 }

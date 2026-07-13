@@ -7,9 +7,10 @@ use App\Models\Task;
 
 class DashboardController extends Controller
 {
-    public function showdashBoard(){
-        $tasks=Task::all();
-        return view('dashboard',compact('tasks'));
+    public function showdashBoard()
+    {
+        $tasks = Task::where('user_id', auth()->id())->get();
+        return view('dashboard', compact('tasks'));
     }
 }
 

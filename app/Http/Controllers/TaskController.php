@@ -13,6 +13,7 @@ class TaskController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'priority' => $request->priority,
+            'user_id' => auth()->id()
         ]);
         return redirect('/dashboard');
     }
