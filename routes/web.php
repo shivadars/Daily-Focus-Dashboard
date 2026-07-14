@@ -20,4 +20,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/tasks/{task}', [TaskController::class, 'editask']);
     Route::delete('/tasks/{task}', [TaskController::class, 'destroytask']);
     Route::patch('/tasks/{task}/toggle', [TaskController::class, 'toggleStatus']);
+    Route::post('/logout',[AuthController::class,'logout']);
 });
+ 

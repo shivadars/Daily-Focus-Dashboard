@@ -168,7 +168,13 @@
             <p>Today's Tasks</p>
         </div>
 
-        <button class="btn" id="addTaskBtn">+ Add Task</button>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <button class="btn" id="addTaskBtn">+ Add Task</button>
+            <form action="/logout" method="POST" style="margin: 0;">
+                @csrf
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        </div>
     </div>
 
     @php
