@@ -13,7 +13,8 @@ class TaskController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'priority' => $request->priority,
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
+            'start_time' => $request->start_time,
         ]);
         return redirect('/dashboard');
     }
@@ -23,7 +24,8 @@ class TaskController extends Controller
             [
                 'title',
                 'description',
-                'priority'
+                'priority',
+                'start_time'
             ]
         ));
         return redirect('/dashboard');
