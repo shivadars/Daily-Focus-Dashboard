@@ -212,6 +212,11 @@
                             <small style="display:inline-block; margin-top: 10px; padding: 2px 8px; background: #eee; border-radius: 3px;">
                                 Priority: {{ $task->priority }}
                             </small>
+                            @if($task->start_time)
+                            <small style="display:inline-block; margin-top: 5px; margin-left: 5px; padding: 2px 8px; background: #fff3cd; border-radius: 3px; color: #856404;">
+                                ⏰ Start: {{ \Carbon\Carbon::parse($task->start_time)->format('h:i A') }}
+                            </small>
+                            @endif
                         </div>
                     </div>
 
@@ -223,6 +228,7 @@
                             data-title="{{ $task->title }}"
                             data-description="{{ $task->description }}"
                             data-priority="{{ $task->priority }}"
+                            data-start-time="{{ $task->start_time }}"
                         >
                             Edit
                         </button>
@@ -267,6 +273,9 @@
                 <option value="Low">Low</option>
             </select>
 
+            <label>Planned Start Time (optional)</label>
+            <input type="time" name="start_time">
+
             <div class="modal-buttons">
                 <button type="button" class="btn-cancel closeModalBtn">Cancel</button>
                 <button type="submit" class="btn">Save Task</button>
@@ -294,6 +303,9 @@
                 <option value="Medium">Medium</option>
                 <option value="Low">Low</option>
             </select>
+
+            <label>Planned Start Time (optional)</label>
+            <input type="time" id="edit_start_time" name="start_time">
 
             <div class="modal-buttons">
                 <button type="button" class="btn-cancel closeModalBtn">Cancel</button>
@@ -330,6 +342,7 @@
             document.getElementById("edit_title").value = taskTitle;
             document.getElementById("edit_description").value = taskDesc;
             document.getElementById("edit_priority").value = taskPriority;
+            document.getElementById("edit_start_time").value = this.getAttribute("data-start-time") ?? '';
 
             // Show Edit Modal
             editTaskModal.style.display = "block";
