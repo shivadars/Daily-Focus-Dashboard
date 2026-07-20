@@ -13,22 +13,21 @@ class OverdueTaskMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public Task $task;  // ← store the task here
+    public Task $task;
 
-    public function __construct(Task $task)  // ← receive the task
+    public function __construct(Task $task)
     {
         $this->task = $task;
     }
 
-    // Subject line of the email
+
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: '⏰ Missed Start Time: ' . $this->task->title,
+            subject: 'Missed Start Time: ' . $this->task->title,
         );
     }
 
-    // Which blade template to use as the email body
     public function content(): Content
     {
         return new Content(
